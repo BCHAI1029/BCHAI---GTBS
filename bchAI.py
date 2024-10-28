@@ -4,20 +4,15 @@ import time
 
 st.title("부천고 챗봇")
 
-
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 with st.sidebar:
     "[부천고등학교 홈페이지](https://bch-h.goebc.kr/bch-h/main.do)"
-    openai_api_key = st.text_input("OpenAI API KEY", key="chatbot_api_key", type="password")
-
-    client = OpenAI(api_key= openai_api_key)
     
     thread_id = st.text_input("쓰레드 ID")
 
     thread_btn = st.button("쓰레드 만들기")
-    if not openai_api_key:
-        st.info("API키를 입력해 주세요")
-        st.stop()
+
     if thread_btn:
         thread = client.beta.threads.create()
         thread_id = thread.id
