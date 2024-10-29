@@ -2,7 +2,7 @@ from openai import OpenAI
 import streamlit as st
 import time
 
-st.title("부천고 챗봇")
+st.title("부천고 챗봇 - GTBS")
 
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
@@ -35,10 +35,12 @@ for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
 
 if prompt := st.chat_input():
-    
+    if not thread_id:
+        st.info("쓰레드 아이디를 추가해 주세요")
+        st.stop()
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
-
+    
     thread_message = client.beta.threads.messages.create(
         thread_id,
         role="user",
