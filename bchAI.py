@@ -8,6 +8,7 @@ client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 with st.sidebar:
     "[부천고등학교 홈페이지](https://bch-h.goebc.kr/bch-h/main.do)"
+    [thread_GBK5gCOaLHkmtTkNY8Q5CZ73]
     
     thread_id = st.text_input("쓰레드 ID")
 
